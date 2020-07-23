@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ site_title + ' - ' if site_title }}Flask Starter</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+</head>
+<body>
+	{% block content %}{% endblock content %}
+	<script type="text/javascript" src="{{ url_for('static', filename='jquery.slim.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    {% block bottom_scripts %}{% endblock bottom_scripts %}
+</body>
+</html>

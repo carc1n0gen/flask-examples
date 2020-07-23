@@ -1,0 +1,13 @@
+{% extends '_page.html' %}
+{% set site_title = 'Profile' %}
+
+{% block page %}
+<small><a href="{{ url_for('profile.edit') }}">edit profile</a></small>
+<div class="media">
+    <img class="mr-3" src="{{ current_user.photo if current_user.photo else 'https://placekitten.com/g/64/64' }}" width="64" height="64" alt="Profile Photo">
+    <div class="media-body">
+        <h2>{{ current_user.username }}</h2>
+        {{ current_user.bio | markdown | safe if current_user.bio }}
+    </div>
+</div>
+{% endblock page %}

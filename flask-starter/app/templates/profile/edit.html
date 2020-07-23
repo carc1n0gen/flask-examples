@@ -1,0 +1,57 @@
+{% extends '_page.html' %}
+{% set site_title = 'Profile' %}
+
+{% block page %}
+<small><a href="{{ url_for('profile.index') }}">&larr; back to profile</a></small>
+<form method="POST">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {% set class = 'form-control is-invalid' if form.username.errors else 'form-control' %}
+        {{ form.username.label }}
+        {{ form.username(class=class) }}
+        <div class="invalid-feedback">
+            {{ form.username.errors[0] }}
+        </div>
+    </div>
+
+    <div class="alert alert-secondary">
+        To change your password, enter your current password and a new password.
+    </div>
+
+    <div class="form-group">
+        {% set class = 'form-control is-invalid' if form.current_password.errors else 'form-control' %}
+        {{ form.current_password.label }}
+        {{ form.current_password(class=class) }}
+        <div class="invalid-feedback">
+            {{ form.current_password.errors[0] }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {% set class = 'form-control is-invalid' if form.new_password.errors else 'form-control' %}
+        {{ form.new_password.label }}
+        {{ form.new_password(class=class) }}
+        <div class="invalid-feedback">
+            {{ form.new_password.errors[0] }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.photo.label }}
+        {{ form.photo(class='form-control') }}
+    </div>
+
+    <div class="form-group">
+        {{ form.bio.label }}
+        {{ form.bio(class='form-control') }}
+    </div>
+
+    {{ form.submit(class='btn btn-success', value='Save') }}
+</form>
+{% endblock page %}
+
+{% block bottom_scripts %}
+<script>
+    var simplemde = new SimpleMDE({ element: document.getElementById('bio') });
+</script>
+{% endblock bottom_scripts %}
