@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <p>This list is populated by server side events.</p>
+    <ul id="list"></ul>
+    <script>
+        const list = document.getElementById('list');
+        const source = new EventSource('/events');
+        source.onerror = (e) => source.close(); // If you remove this line, the list will repeat whenever it ends.
+        source.onmessage = (event) => list.innerHTML += `<li>${event.data}</li>`;
+    </script>
+</html>
