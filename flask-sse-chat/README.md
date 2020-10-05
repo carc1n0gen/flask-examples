@@ -5,6 +5,11 @@ An example of using server side events in a chat app with flask.  Not to be conf
 _**NOTE**: this app is for demonstration purposes only.  It is not secure.  It doesn't even prevent html injection_
 
 
+## Preview
+
+<img src="./screenshot.jpg" width="200">
+
+
 ## Quickstart
 
 1.
