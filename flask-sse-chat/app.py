@@ -50,7 +50,6 @@ def message_generator():
     pubsub.subscribe('chat')
     for message in pubsub.listen():
         if message['type'] == 'message':
-            print(message['data'])
             yield f'data: {message["data"].decode("utf-8")}\n\n'
 
 
