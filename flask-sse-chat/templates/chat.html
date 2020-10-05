@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+    <title>Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        * {
+            font-family: inherit;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%
+        }
+
+        .nickname {
+            display: flex;
+            padding: 10px;
+            background-color: rgb(187, 196, 201);
+        }
+
+        .nickname-value {
+            font-size: 18px;
+            flex-grow: 1;
+            margin: 0;
+            border-radius: 6px;
+            border: none;
+            padding: 5px;
+        }
+
+        .nickname-save {
+            margin-left: 5px;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 18px;
+            background-color: rgb(0, 124, 255);
+            color: #fff;
+        }
+
+        .chat-history {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            padding: 15px;
+            margin-bottom: auto;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            margin: 15px;
+            max-width: 70%;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .chat-message-first {
+            margin-top: auto;
+        }
+
+        .chat-message-me {
+            margin-right: auto;
+            background-color: rgb(191, 255, 191);
+        }
+
+        .chat-message-them {
+            margin-left: auto;
+            background-color: rgb(226, 226, 226);
+        }
+
+        .chat-message-nickname {
+            font-weight: bold;
+        }
+
+        .controls {
+            position: relative;
+            padding: 10px;
+            display: flex;
+            background-color: rgb(187, 196, 201);
+        }
+
+        .controls:after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .controls.allow:after {
+            display: none;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            resize: none;
+            font-size: 18px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .chat-send {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            padding: 5px 15px;
+            /* background-color: rgb(91 127 255);; */
+            /* border: 1px solid rgb(0, 0, 149); */
+            border: none;
+            /* background-color: transparent; */
+            border-radius: 6px;
+            margin-top: auto;
+            margin-bottom: auto;
+            background-color: rgb(0, 124, 255);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 30px;
+            color: #fff;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+    </style>
+
+    <div class="wrapper">
+        <div class="nickname">
+            <span style="display: none;" id="nickname-show"></span>
+            <label for="nickname" class="sr-only">Nickname</label>
+            <input type="text" id="nickname" name="nickname" class="nickname-value" placeholder="Enter nickname and save to continue.">
+            <button class="nickname-save" id="nickname-save">save</button>
+        </div>
+        <div class="chat-history" id="chat-history">
+        </div>
+        <div class="controls" id="controls">
+            <textarea name="input" id="input" class="chat-input" aria-label="Enter message" rows="4"></textarea>
+            <button id="send-button" class="chat-send">
+                <span class="sr-only">send</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const id = '{{ id }}';
+        const nickname = document.getElementById('nickname');
+        const nicknameSave = document.getElementById('nickname-save');
+        const nicknameShow = document.getElementById('nickname-show');
+        const input = document.getElementById('input');
+        const sendButton = document.getElementById('send-button');
+        const chatHistory = document.getElementById('chat-history');
+        const source = new EventSource('/messages');
+        source.addEventListener('message', (event) => {
+            data = JSON.parse(event.data);
+
+            const child = document.createElement('div');
+            child.innerHTML = `
+                <span class="chat-message-nickname">${data.id === id ? 'me' : data.nickname}:</span> ${data.text}
+            `;
+            child.classList.add('chat-message');
+
+            if (chatHistory.children.length === 0) {
+                child.classList.add('chat-message-first');
+            }
+
+            if (data.id === id) {
+                child.classList.add('chat-message-me');
+            } else {
+                child.classList.add('chat-message-them');
+            }
+
+            chatHistory.appendChild(child);
+            child.scrollIntoView();
+        });
+
+        function sendMessage() {
+            const data = new FormData();
+            data.append('text', input.value);
+            data.append('nickname', nickname.value);
+            fetch('/send', { body: data, method: 'POST' });
+            input.value = '';
+        }
+
+        input.addEventListener('keyup', (event) => {
+            if (event.code === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        sendButton.addEventListener('click', () => {
+            if (input.value.trim()) {
+                sendMessage();
+            }
+        });
+
+        nicknameSave.addEventListener('click', () => {
+            if (nickname.value.trim()) {
+                nicknameShow.innerText = `Chatting as ${nickname.value}`;
+                nickname.style.display = 'none';
+                nicknameSave.style.display = 'none';
+                nicknameShow.style.display = 'initial';
+                controls.classList.add('allow');
+            }
+        });
+    </script>
+</html>
