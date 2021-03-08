@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 
 mix.setPublicPath('server');
-mix.js('client/index.js', 'static/index.js');
+mix.js('client/index.js', 'static/index.js').vue();
 
 mix.options({
   hmrOptions: {

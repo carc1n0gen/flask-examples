@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 
 mix.setPublicPath('server');
-mix.react('client/index.js', 'static/index.js');
+mix.js('client/index.js', 'static/index.js').react();
 
 mix.options({
   hmrOptions: {
