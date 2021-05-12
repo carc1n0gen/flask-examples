@@ -15,7 +15,7 @@
     "cross-env": "^7.0",
     "laravel-mix": "^6.0.13",
     "lodash": "^4.17.19",
-    "postcss": "^8.2.7",
+    "postcss": "^8.2.10",
     "react": "^17.0.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
