@@ -22,7 +22,7 @@ Quickstart
 
     `npm run hot`
 
-5. Open your browser to [localhost:5000](http://localhost:9000)
+5. Open your browser to [localhost:9000](http://localhost:9000)
 
 With this setup, the flask server will autorestart on changes, requests
 will be proxied from the webpack dev server to flask, and the vue app will
