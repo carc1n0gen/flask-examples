@@ -1,5 +1,7 @@
 # Flask Basic Blog
 
+![image](https://user-images.githubusercontent.com/8248986/194425459-6e332328-3448-46c8-9a35-79758a9111f8.png)
+
 A simple starting point for a basic CRUD app with flask.
 
 ## Requirements
