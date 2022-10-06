@@ -1,0 +1,33 @@
+{% extends '_layout.html' %} 
+
+{% block page %}
+
+{% if not posts %}
+<div class="container">
+    <div class="card">
+        No posts yet.
+    </div>
+</div>
+{% endif %}
+
+<div class="container">
+{% for post in posts %}
+    <article class="card post">
+        <header class="post-title">
+            <a href="{{url_for('blog.post', slug=post.slug)}}"><h1>{{post.title}}</h1></a>
+        </header>
+        <section class="post-content">
+            {{post.excerpt}}
+        </section>
+        <footer class="post-footer">
+            <span class="post-meta">
+                posted by {{config.BLOG_AUTHOR}}
+                <span class="post-meta-sep"></span>
+                {{post.created_at.strftime(config.BLOG_DATE_FORMAT)}}
+            </span>
+        </footer>
+    </article>
+{% endfor %}
+</div> <!-- container -->
+
+{% endblock page %}

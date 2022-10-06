@@ -1,0 +1,50 @@
+{% extends '_layout.html' %}
+{% set page_title = 'Dashboard' %}
+
+{% block page %}
+<div class="container">
+  <div class="card">
+    <h1>Dashboard</h1>
+
+    <a href="{{url_for('admin.edit')}}" class="button button-success mb-sm inline-block">Create Post</a>
+
+    {% if not posts %}
+    <p>There are no posts yet.</p>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(category_filter=['dashboard.success']) %}
+        {% if messages %}
+        <div class="alert alert-success">
+            <ul>
+            {%- for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor -%}
+            </ul>
+        </div>
+        {% endif %}
+    {% endwith %}
+    
+    {% if posts %}
+    <table>
+        <thead>
+            <tr>
+                <th>Post</th>
+                <th style="text-align: right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td><a href="{{url_for('admin.edit', slug=post.slug)}}">{{post.title}}</a></td>
+                <td style="text-align: right">
+                    <a href="{{url_for('admin.edit', slug=post.slug)}}">Edit</a>
+                    <a href="{{url_for('admin.delete', slug=post.slug)}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock page %}

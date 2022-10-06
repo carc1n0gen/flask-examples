@@ -1,0 +1,23 @@
+{% extends '_layout.html' %}
+{% set page_title = 'Delete' %}
+
+{% block page %}
+<div class="container">
+  <div class="card">
+    <h1>Confirm Delete</h1>
+
+    <form method="POST">
+        {{csrf_token}}
+
+        <div class="alert alert-warning">
+          <p>You are about to delete post: <b>{{post.title}}</b></p>
+          <p>Are you sure you want to delete it?</p>
+        </div>
+
+        <a href="{{url_for('admin.dashboard')}}" class="button button-primary">Go Back</a>
+        <button class="button button-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+{% endblock page %}

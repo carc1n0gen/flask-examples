@@ -1,0 +1,40 @@
+{% extends '_layout.html' %}
+{% set page_title = 'Login' %}
+
+{% block page %}
+<div class="container">
+    <div class="card">
+        <h1>Login</h1>
+
+        {% with errors = get_flashed_messages(category_filter=['login.error']) %}
+            {% if errors %}
+            <div class="alert alert-danger">
+                <ul>
+                {%- for msg in errors %}
+                    <li>{{ msg }}</li>
+                {% endfor -%}
+                </ul>
+            </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            {{form.csrf_token}}
+
+            <div class="form-group">
+                {{form.username.label}}
+                {{form.username}}
+            </div>
+
+            <div class="form-group">
+                {{form.password.label}}
+                {{form.password}}
+            </div>
+
+            <div class="flex">
+                <button class="button button-primary ml-auto">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock page %}

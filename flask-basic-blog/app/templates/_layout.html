@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% if page_title%}{{page_title}} - {% endif %}{{config.BLOG_TITLE}}</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='styles.css')}}"
+    />
+    {% block extra_styles %}{% endblock %}
+  </head>
+  <body>
+    {% if current_user.is_authenticated %}
+    {% include 'admin_toolbar.html' %}
+    {% endif %}
+    <header class="site-header">
+      <div class="container">
+        <a href="{{url_for('blog.home')}}"><h1>{{config.BLOG_TITLE}}</h1></a>
+        <p>{{config.BLOG_TAGLINE}}</p>
+      </div>
+    </header>
+    <main>
+      {% block page %}
+      <div class="container">
+        <div class="card">
+          <p>Nothing to show here yet.</p>
+        </div>
+      </div>
+      {% endblock %}
+    </main>
+    <footer class="site-footer">
+      &copy; {{config.BLOG_AUTHOR}} {{ current_year() }}
+      {% if not current_user.is_authenticated %} | <a href="{{url_for('admin.dashboard')}}">Dashboard</a>{% endif %}
+    </footer>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>

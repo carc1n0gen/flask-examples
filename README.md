@@ -2,9 +2,9 @@
 
 My personal collection of flask example apps
 
-* [flask-react](./flask-react)
-* [flask-sse](./flask-sse)
-* [flask-sse-chat](./flask-sse-chat)
-* [flask-starter](./flask-starter)
-* [flask-tailwind](./flask-tailwind)
-* [flaks-vue](./flask-vue)
+* [Flask Basic Blog](./flask-basic-blog)
+* [Flask React](./flask-react)
+* [Flask SSE](./flask-sse)
+* [Flask SSE Chat](./flask-sse-chat)
+* [Flask Tailwind](./flask-tailwind)
+* [Flask Vue](./flask-vue)

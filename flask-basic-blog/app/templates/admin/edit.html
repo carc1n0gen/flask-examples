@@ -1,0 +1,103 @@
+{% extends '_layout.html' %}
+{% set page_title = 'Edit' %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='highlight/styles/' ~ config.BLOG_HIGHLIGHT_THEME ~ '.min.css')}}">
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{url_for('static', filename='highlight/highlight.min.js')}}"></script>
+<script src="{{url_for('static', filename='ckeditor/ckeditor.js')}}"></script>
+<script>
+const title = document.querySelector('#{{form.title.id}}')
+const slug = document.querySelector('#{{form.slug.id}}')
+
+title.addEventListener('keyup', (e) => {
+    slug.value = e.target.value.trim().toLowerCase().replaceAll(' ', '-')
+})
+
+CKEDITOR.replace('content', {
+    height: '500px',
+    extraPlugins: 'codesnippet',
+})
+
+hljs.highlightAll()
+</script>
+{% endblock %}
+
+{% block page %}
+<div class="container">
+  <div class="card">
+    <h1>Dashboard - Edit</h1>
+
+    <a href="{{url_for('admin.dashboard')}}" class="button button-primary">Back</a>
+
+    <br>
+    <br>
+
+    <form method="POST">
+        {{form.csrf_token}}
+
+        <div class="form-group">
+            {{form.title.label}}
+            {{form.title}}
+            {% if form.title.errors %}
+            <div class="input-feedback input-feedback-error">
+                <ul>
+                {% for error in form.title.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{form.slug.label}}
+            {{form.slug(readonly=True)}}
+            {% if form.slug.errors %}
+            <div class="input-feedback input-feedback-error">
+                <ul>
+                {% for error in form.slug.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{form.excerpt.label}}
+            {{form.excerpt}}
+            {% if form.excerpt.errors %}
+            <div class="input-feedback input-feedback-error">
+                <ul>
+                {% for error in form.excerpt.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{form.content.label}}
+            {{form.content}}
+            {% if form.content.errors %}
+            <div class="input-feedback input-feedback-error">
+                <ul>
+                {% for error in form.content.errors %}
+                    <li>{{error}}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="flex">
+            <button class="button button-success ml-auto">Save</button>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock page %}
