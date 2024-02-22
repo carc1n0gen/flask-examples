@@ -13,7 +13,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', [DataRequired()])
     password = PasswordField('Password', [DataRequired()])
 
-    def validate(self):
+    def validate(self, extra_validators=[]):
         rv = FlaskForm.validate(self)
         if not rv:
             return False
