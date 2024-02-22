@@ -109,3 +109,6 @@ ENV/
 #sqlite
 *.db
 *.sqlite
+
+# app config
+config.yml

@@ -1,8 +1,0 @@
-BLOG_TITLE: My Blog
-BLOG_TAGLINE: Something super catchy
-BLOG_AUTHOR: Your Name
-BLOG_HIGHLIGHT_THEME: atom-one-dark
-BLOG_DATE_FORMAT: "%B %d, %Y"
-
-SECRET_KEY: Don't forget to change this
-SQLALCHEMY_DATABASE_URI: sqlite:///../data/blog.db
