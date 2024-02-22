@@ -7,7 +7,7 @@ setup:
 	. .venv/bin/activate; pip install -r requirements.txt
 
 
-setup-dev:
+setup-dev: setup
 	. .venv/bin/activate; pip install -r requirements-dev.txt
 
 
