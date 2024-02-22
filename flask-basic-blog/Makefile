@@ -15,7 +15,7 @@ db:
 	. .venv/bin/activate; flask db upgrade
 
 
-new-user:
+create-user:
 	. .venv/bin/activate; flask create-user
 
 

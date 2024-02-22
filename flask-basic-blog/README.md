@@ -26,7 +26,14 @@ A simple starting point for a basic CRUD app with flask.
 
     This will create the venv, install dependencies, run database migrations, and run the development server all in one go.
 
-2. Open the app in a browser at [http://127.0.0.1:5000](http://127.0.0.1:5000)
+2.
+    Create a user
+
+       make create-user
+
+3. Open the app in a browser at [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+See the `Makefile` for other commands
 
 ### Manually
 
