@@ -2,6 +2,7 @@ all: setup db dev-server
 
 
 setup:
+	test -e config.yml || cp config.example.yml config.yml
 	test -d .venv || python -m venv .venv
 	. .venv/bin/activate; pip install -r requirements.txt
 

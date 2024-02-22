@@ -17,24 +17,37 @@ A simple starting point for a basic CRUD app with flask.
 
 ## Getting Started
 
+### With make
+
+1. 
+    Just run make!
+    
+       make
+
+    This will create the venv, install dependencies, run database migrations, and run the development server all in one go.
+
+2. Open the app in a browser at [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+### Manually
+
 1. Install dependencies
 
     - Create a venv
         
-            python -m venv venv
+          python -m venv venv
     
     - Activate the venv
         
-            source ./venv/bin/activate
+          source ./venv/bin/activate
 
     - Run pip install
     
-            pip install -R requirements.txt
+          pip install -R requirements.txt
 
 
 2. Copy example config
 
-        cp ./config.example.yml ./config.yml
+       cp ./config.example.yml ./config.yml
 
 
 3. (Optional) Modify config
@@ -42,17 +55,17 @@ A simple starting point for a basic CRUD app with flask.
 
 4. Setup the database
 
-        flask db upgrade
+       flask db upgrade
 
 
 5. Create a user
 
-        flask create-user
+       flask create-user
 
 
 6. Run the development server
 
-        flask run
+       flask run
 
 
 7. Open the app in a browser at [http://127.0.0.1:5000](http://127.0.0.1:5000)
