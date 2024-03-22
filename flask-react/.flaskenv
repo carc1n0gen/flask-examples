@@ -1,3 +1,0 @@
-export FLASK_APP=server.create_app
-export FLASK_ENV=development
-export FLASK_RUN_PORT=6000
