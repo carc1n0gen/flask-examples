@@ -7,4 +7,3 @@ My personal collection of flask example apps
 * [Flask SSE](./flask-sse)
 * [Flask SSE Chat](./flask-sse-chat)
 * [Flask Tailwind](./flask-tailwind)
-* [Flask Vue](./flask-vue)
